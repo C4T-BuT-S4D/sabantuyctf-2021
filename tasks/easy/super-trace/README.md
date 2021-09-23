@@ -28,7 +28,7 @@ Super Trace
 
 Далее можно запарсить всё с помощью скрипта или найти руками.
 
-Пример решения: [dev/solution.py](dev/solution.py)
+Пример решения: [dev/solution.py](solve/solution.py)
 
 ## Флаг
 
