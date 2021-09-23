@@ -26,7 +26,7 @@ Flag Eater
 
 Для решения нужно достать байты из памяти, а также ключ для шифрования.
 
-Пример решения: [dev/solution.py](dev/solution.py)
+Пример решения: [dev/solution.py](solve/solution.py)
 
 ## Флаг
 
