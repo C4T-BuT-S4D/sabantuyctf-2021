@@ -1,0 +1,22 @@
+version: '2.4'
+
+services:
+  periodic:
+    container_name: periodic
+    hostname: periodic
+    build: .
+    restart: on-failure
+    ports:
+      - '25687:22'
+    read_only: true
+    tmpfs:
+      # tmp directory only for root
+      - /tmp/:mode=755,size=16K,uid=0,gid=0
+      # directories for sshd and crond daemons
+      - /run/sshd/:mode=700,size=16K,uid=0,gid=0
+      - /run/crond/:mode=700,size=16K,uid=0,gid=0
+      # directory for script's temporary files
+      - /var/tmp/data/:mode=755,size=1M,uid=1001,gid=1001
+    pids_limit: 512
+    mem_limit: 512M
+    cpus: 2
