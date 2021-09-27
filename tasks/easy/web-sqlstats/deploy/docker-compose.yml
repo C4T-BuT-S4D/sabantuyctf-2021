@@ -1,0 +1,11 @@
+version: "2.4"
+services:
+  nginx:
+    build: .
+    volumes:
+      - "./static:/static:ro"
+    ports:
+      - 40000:80
+    cpus: 0.5
+    pids_limit: 256
+    mem_limit: 512m

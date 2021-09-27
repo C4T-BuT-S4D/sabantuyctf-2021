@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset='utf-8'>
+    <title>Shops list</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <style>
+        #paper { /* svg on an img tag */
+            -webkit-filter: invert(.75); /* safari 6.0 - 9.0 */
+            filter: invert(.75);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class='container m-5'>
+        <h3>Найти магазины</h3>
+        <form method="get" action="#">
+            <select id="citySelect" class="custom-select custom-select-lg mb-3" aria-label="Выберите город">
+                <option value="Москва">Москва</option>
+                <option value="Мытищи">Мытищи</option>
+                <option value="Уфа">Уфа</option>
+            </select>
+            <label>
+                Адрес (или часть)
+                <input class="form-control" id="addrInput" type="text" name="address" placeholder="Карла">
+            </label>
+            <a class="btn" href="#" onclick="submit()" id="calc_btn">Найти</a>
+        </form>
+    </div>
+
+    <div class="container m-5">
+        <div id="shopList" class="row">
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    <script>
+        function submit() {
+            var city = document.getElementById("citySelect").value;
+            var addr = document.getElementById('addrInput').value;
+            let params = {city: city};
+            if (addr !== '' && addr != null) {
+                params.address = addr;
+            }
+            const url = '/api/query?' + new URLSearchParams(params);
+            console.log(url);
+            fetch(url).then((response) => {
+                response.json().then(data => {
+                    if (typeof data.error !== 'undefined') {
+                        alert('Error message: ' + data.error);
+                    } else {
+                        var shopList = document.getElementById('shopList');
+                        let listHTML = '';
+                        if (!Array.isArray(data.shops) || data.shops.length === 0) {
+                            shopList.innerHTML = '<h3>Ничего не найдено</h3>';
+                            return;
+                        }
+                        data.shops.forEach(shop => {
+                            let img = '/images/' + shop.image;
+                            listHTML += `
+                                <div class="col-md-4">
+<!--                                    <div class="card" style="width: 18rem;">-->
+                                    <img class="card-img-top"  height="300px" src="${img}" alt="Card image cap">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${shop.city}</h5>
+                                        <p class="card-text">${shop.address}</p>
+                                    </div>
+                                </div>
+                            `
+                        })
+                        shopList.innerHTML = listHTML;
+                    }
+                })
+            });
+        }
+    </script>
+</footer>
+</body>
+</html>
