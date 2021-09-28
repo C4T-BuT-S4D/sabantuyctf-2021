@@ -1,0 +1,57 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employees list</title>
+    <link rel="stylesheet" href="style.min.css"/>
+</head>
+<body>
+<section>
+    <header>
+        <b>Employees list</b>
+        <!-- <a href="/app.js">backend source</a> -->
+    </header>
+    <article>
+        <p>
+            Can you get the <code>Admin</code> password ?
+            Note: only vaccinated employees are listed by now.
+        </p>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Vaccinated?</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </article>
+
+    <footer>
+        <p>
+            <small>C4T BuT S4F with <3</small>
+        </p>
+    </footer>
+</section>
+<script>
+    window.onload = function () {
+        fetch('/api/employees?isVaccinated=1').then((response) => {
+            response.json().then(data => {
+                var tbody = document.querySelector('tbody');
+                data.forEach(employee => {
+                    var row = tbody.insertRow();
+                    var fields = ['id', 'username', 'email', 'isVaccinated'];
+                    fields.forEach(function (field) {
+                        var cell = row.insertCell();
+                        var text = document.createTextNode(employee[field]);
+                        cell.appendChild(text);
+                    });
+                });
+            });
+        });
+    }
+</script>
+</body>
+</html>
