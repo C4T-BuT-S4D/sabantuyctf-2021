@@ -1,0 +1,12 @@
+version: "2.4"
+services:
+  node:
+    build: .
+    ports:
+      - 40040:80
+    cpus: 1
+    pids_limit: 1024
+    mem_limit: 512m
+    environment:
+      - SECRET_TOKEN=YOuD0nTNeedItToSolveTheTAsk
+      - FLAG=Sabantuy{w0w_y0u_kn0w_st3gan0_and_w3b}
