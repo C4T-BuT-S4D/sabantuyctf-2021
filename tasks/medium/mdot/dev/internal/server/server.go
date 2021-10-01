@@ -22,7 +22,7 @@ type Server struct {
 func generateListing(files map[string]string) string {
 	result := ""
 	for filepath := range files {
-		result += fmt.Sprintf("- [%s](%s)", filepath, filepath)
+		result += fmt.Sprintf("- [%s](%s)\n", filepath, filepath)
 	}
 	return result
 }
@@ -37,7 +37,7 @@ func (s *Server) readRequest(conn *net.TCPConn) (*protocol.Request, error) {
 }
 
 func (s *Server) sendResponse(conn *net.TCPConn, resp *protocol.Response) error {
-	s.logger.Printf("[%v] Response: %v", conn.RemoteAddr().String(), resp)
+	s.logger.Printf("[%v] Response: %v", conn.RemoteAddr().String(), resp.Status)
 	return protocol.WriteResponse(conn, resp)
 }
 
