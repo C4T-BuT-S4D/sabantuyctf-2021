@@ -33,7 +33,7 @@ func main() {
 			response          *protocol.Response = nil
 			err               error              = nil
 		)
-		time.Sleep(time.Second * 1)
+		time.Sleep(time.Second)
 		fmt.Scan(&verb, &path)
 		switch verb {
 		case "read":

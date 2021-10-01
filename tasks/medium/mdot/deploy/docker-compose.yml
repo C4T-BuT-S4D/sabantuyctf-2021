@@ -1,0 +1,14 @@
+version: "2.4"
+services:
+  mdot:
+    build:
+      context: .
+    container_name: mdot-server
+    ports:
+      - "7682:4020"
+    environment:
+      FLAG: "Sabantuy{dayumm-nice-markdown-ya-got-there}"
+      PORT: "4020"
+    cpus: 1
+    pids_limit: 32
+    mem_limit: 128M
