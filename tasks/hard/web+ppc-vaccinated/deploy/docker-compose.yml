@@ -1,0 +1,9 @@
+version: "2.4"
+services:
+  node:
+    build: ""
+    ports:
+      - 40004:40004
+    cpus: 2
+    pids_limit: 1024
+    mem_limit: 1024m

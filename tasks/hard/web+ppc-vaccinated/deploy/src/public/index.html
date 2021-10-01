@@ -1,0 +1,55 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Employees list</title>
+    <link rel="stylesheet" href="style.min.css"/>
+</head>
+<body>
+<section>
+    <article>
+        <p>This website use modern anti-DDOS protection.</p>
+        <p>To proceed please solve the captcha first:</p>
+        <p>Find such <b>x</b> that <code>md5(<span id="prefix"></span> + x).hexdigest()[:4] == '0000'</code>
+        </p>
+        <label>
+            X: <input type="text" name="x" id="xInput">
+        </label>
+        <button type="button" name="check" onclick="checkCaptcha()">Check!</button>
+    </article>
+
+    <footer>
+        <p>
+            <small>C4T BuT S4F with <3</small>
+        </p>
+    </footer>
+</section>
+<script>
+    window.onload = function () {
+        fetch('/api/captcha').then((response) => {
+            response.json().then(data => {
+                document.getElementById('prefix').innerText = `'${data.prefix}'`;
+            });
+        });
+    }
+
+    function checkCaptcha() {
+        var answer = document.getElementById('xInput').value;
+        fetch('/api/captcha', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({answer: answer})}
+        ).then((response) => {
+            response.json().then(data => {
+                if (data.solved) {
+                    window.location = '/list.html';
+                } else {
+                    alert('Invalid captcha answer!');
+                }
+            })
+        })
+    }
+</script>
+</body>
+</html>
