@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset='utf-8'>
+    <title>Shops list</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+    <style>
+        #paper { /* svg on an img tag */
+            -webkit-filter: invert(.75); /* safari 6.0 - 9.0 */
+            filter: invert(.75);
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class='container m-5'>
+        <h3>Представьтесь!</h3>
+        <form method="get" action="#">
+            <label>
+                Login:
+                <input class="form-control" id="loginInput" type="text" name="login" placeholder="User">
+            </label>
+            <br>
+            <a class="btn" href="#" onclick="submit()" id="calc_btn">Login</a>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <script>
+        function submit() {
+            console.log("OH");
+            var login = document.getElementById('loginInput').value;
+            fetch('/api/login?username=' + login).then((response) => {
+                console.log(response.status);
+                if (response.status === 200) {
+                    document.location = '/shops.html';
+                } else {
+                    response.json().then(data => {
+                        alert('Error message: ' + data.error);
+                    })
+                }
+            });
+        }
+    </script>
+</footer>
+</body>
+</html>
