@@ -35,7 +35,11 @@ func main() {
 		Timeout: time.Second * 30,
 		Files:   files,
 	}
-	if err := server.ListenAndServe(":4020"); err != nil {
+	port, ok := os.LookupEnv("PORT")
+	if !ok {
+		port = "4020"
+	}
+	if err := server.ListenAndServe(":" + port); err != nil {
 		fmt.Println("Failed to serve mdot: ", err)
 	}
 }
