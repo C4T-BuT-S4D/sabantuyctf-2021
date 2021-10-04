@@ -1,0 +1,125 @@
+body {
+    width: 40%;
+    margin-left: 30%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: medium;
+    color: #2d2d2d;
+    background: #cdcdcd;
+}
+
+.title {
+    margin: 1em;
+    font-size: xx-large;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.prize {
+    margin: 1em;
+    min-height: 1rem;
+    font-size: xx-large;
+    color: #0000ad;
+}
+
+.submit {
+    width: 60%;
+    margin: 1rem;
+    margin-left: 20%;
+    padding: 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: #2d2d2d 1px solid;
+}
+
+.submit:hover {
+    background: #aeaeae;
+}
+
+.question {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.question p {
+    font-size: larger;
+    font-weight: bold;
+	user-select: none;
+}
+
+.answer {
+    display: flex;
+    margin: 0.5rem;
+    margin-left: 2em;
+    font-size: medium;
+	user-select: none;
+}
+
+.answer input[type=radio] {
+    display: none;
+}
+
+.answer label {
+    width: 100%;
+    padding: 1em;
+    cursor: pointer;
+    border-bottom: 1px solid #5d5d5d;
+}
+
+.answer input[type=radio]:checked + label {
+	outline: 1px solid #5d5d5d;
+    outline-offset: -1px;
+    border-bottom: 1px solid transparent;
+}
+
+.answer label:hover {
+	font-weight: bolder;
+}
+
+.answer input[type=text] {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: medium;
+    background: transparent;
+    border: 1px solid #5d5d5d;
+    outline: none;
+}
+
+.correct {
+    opacity: 50%;
+    background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 1rem,
+        #aeaeae80 1rem,
+        #aeaeae80 2rem
+    );
+}
+
+.wrong {
+    animation: highlight ease-in 1.2s;
+    -o-animation: highlight ease-in 1.2s;
+    -moz-animation: highlight ease-in 1.2s;
+    -webkit-animation: highlight ease-in 1.2s;
+}
+
+@keyframes highlight { 
+    0% { background-color: #e2363650; }
+    100% { background-color: transparent; } 
+}
+
+@-o-keyframes highlight { 
+    0% { background-color: #e2363650; }
+    100% { background-color: transparent; } 
+}
+
+@-moz-keyframes highlight { 
+    0% { background-color: #e2363650; }
+    100% { background-color: transparent; } 
+}
+
+@-webkit-keyframes highlight { 
+    0% { background-color: #e2363650; }
+    100% { background-color: transparent; } 
+}

@@ -1,0 +1,14 @@
+version: '2.4'
+
+services:
+  quiz:
+    container_name: quiz
+    build: .
+    restart: on-failure
+    ports:
+      - "21236:8000"
+    environment:
+      - "PRIZE=Sabantuy{d53b99841621ebc82213d3040427fa13}"
+    pids_limit: 256
+    mem_limit: 256M
+    cpus: 1
