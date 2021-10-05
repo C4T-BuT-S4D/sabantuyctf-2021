@@ -1,0 +1,14 @@
+version: "2.4"
+services:
+  corsbypasser:
+    build:
+      context: .
+    container_name: corsbypasser
+    ports:
+      - "45394:45394"
+    environment:
+      FLAG: "Sabantuy{quite-a-simple-ssrf-gotta-know-ab-loopback-doe}"
+      PORT: "45394"
+    cpus: 1
+    pids_limit: 128
+    mem_limit: 256M
