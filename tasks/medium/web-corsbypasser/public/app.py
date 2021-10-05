@@ -3,7 +3,7 @@ from werkzeug.exceptions import abort
 from werkzeug.routing import Rule
 from http import HTTPStatus
 from urllib.parse import urlparse
-from socket import gethostbyname
+from socket import gaierror, gethostbyname
 import os
 import requests
 
@@ -30,8 +30,13 @@ def bypass():
     return preflight_response(request)
 
   requested_domain = urlparse(request.args["url"]).netloc
-  requested_domain = requested_domain[:requested_domain.index(':')]
-  requested_host = gethostbyname(requested_domain)
+  if ':' in requested_domain:
+    requested_domain = requested_domain[:requested_domain.index(':')]
+  try:
+    requested_host = gethostbyname(requested_domain)
+  except gaierror as e:
+    abort(HTTPStatus.BAD_REQUEST, "Invalid url host specified")
+    
   if requested_host == "0.0.0.0" or requested_host == "127.0.0.1":
     abort(HTTPStatus.FORBIDDEN, "Not allowed")
 
