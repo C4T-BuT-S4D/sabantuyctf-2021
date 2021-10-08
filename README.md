@@ -1,5 +1,7 @@
 # SabantuyCTF 2021
 
+Task sources & writeups from SabantuyCTF 2021 by C4T BuT S4D and Hackerdom.
+
 ## Tasks
 
 Tasks are stored in the [tasks](./tasks) directory. 
